@@ -7,9 +7,10 @@ import fr.thomasbernard03.feed.commons.helpers.implementations.ResourcesHelperIm
 import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.commons.navigation.implementations.NavigatorImpl
 import fr.thomasbernard03.feed.data.local.database.AppDatabase
+import fr.thomasbernard03.feed.data.repositories.CartRepository
 import fr.thomasbernard03.feed.data.repositories.ProductRepository
+import fr.thomasbernard03.feed.data.repositories.implementations.CartRepositoryImpl
 import fr.thomasbernard03.feed.data.repositories.implementations.ProductRepositoryImpl
-import fr.thomasbernard03.feed.domain.usecases.CartUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -31,11 +32,12 @@ class ApplicationController : Application() {
         single<ResourceHelper> { ResourcesHelperImpl() }
 
         single { ProductUseCase() }
-        single { CartUseCase() }
 
         single { database.productDao() }
+        single { database.cartDao() }
 
         single<ProductRepository> { ProductRepositoryImpl()  }
+        single<CartRepository> { CartRepositoryImpl()  }
 
         // https://developer.android.com/kotlin/coroutines/coroutines-best-practices?hl=fr
         single<CoroutineDispatcher> { Dispatchers.IO }
