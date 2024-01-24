@@ -150,7 +150,7 @@ fun ProductScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     PrimaryButton(
-                        enabled = state.quantity > 0,
+                        enabled = state.quantity != state.product.quantity,
                         text = stringResource(id = R.string.add_to_cart),
                         onClick = { onEvent(ProductEvent.OnAddToCart(state.product, state.quantity)) },
                         modifier = Modifier

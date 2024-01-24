@@ -6,6 +6,7 @@ import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.domain.models.Product
 import fr.thomasbernard03.feed.domain.models.Resource
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
+import fr.thomasbernard03.feed.domain.wrappers.ProductWrapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,9 +34,9 @@ class ProductViewModel(
 
     private fun onGetProduct(id : Int){
         viewModelScope.launch {
-            when(val product = productUseCase.getProduct(id)){
+            when(val product = productUseCase.getProductWrapper(id)){
                 is Resource.Success -> {
-                    _uiState.update { it.copy(product = product.data) }
+                    _uiState.update { it.copy(product = product.data, quantity = product.data.quantity) }
                 }
                 is Resource.Error -> {
                     _uiState.update { it.copy(product = null) }
@@ -44,9 +45,9 @@ class ProductViewModel(
         }
     }
 
-    private fun onAddToCart(product: Product, quantity: Int) {
+    private fun onAddToCart(product: ProductWrapper, quantity: Int) {
         viewModelScope.launch {
-            productUseCase.addProductToCart(product.id, quantity)
+            productUseCase.updateQuantityOfProduct(product.id, quantity)
             navigator.goBack()
         }
     }

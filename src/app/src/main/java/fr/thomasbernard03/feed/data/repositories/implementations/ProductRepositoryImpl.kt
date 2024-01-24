@@ -4,7 +4,6 @@ import fr.thomasbernard03.feed.data.local.dao.ProductDao
 import fr.thomasbernard03.feed.data.local.entities.ProductEntity
 import fr.thomasbernard03.feed.data.remote.dto.ProductDto
 import fr.thomasbernard03.feed.data.repositories.ProductRepository
-import fr.thomasbernard03.feed.domain.models.Product
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.koin.java.KoinJavaComponent.get
