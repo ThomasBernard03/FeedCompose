@@ -3,6 +3,8 @@ package fr.thomasbernard03.feed
 import android.app.Application
 import fr.thomasbernard03.feed.commons.helpers.ResourceHelper
 import fr.thomasbernard03.feed.commons.helpers.implementations.ResourcesHelperImpl
+import fr.thomasbernard03.feed.commons.navigation.Navigator
+import fr.thomasbernard03.feed.commons.navigation.implementations.NavigatorImpl
 import fr.thomasbernard03.feed.domain.usecases.MenuUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,6 +15,8 @@ import org.koin.dsl.module
 
 class ApplicationController : Application() {
     private val appModule = module {
+        single<Navigator> { NavigatorImpl() }
+
         single<ResourceHelper> { ResourcesHelperImpl() }
 
         single { MenuUseCase() }

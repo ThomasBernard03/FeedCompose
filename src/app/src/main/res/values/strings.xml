@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Feed</string>
 
+    <string name="home">Menu</string>
+    <string name="news">Actualités</string>
+    <string name="basket">Panier</string>
+
+
     <string name="order">Commander</string>
 </resources>

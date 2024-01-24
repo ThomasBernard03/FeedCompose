@@ -2,6 +2,8 @@ package fr.thomasbernard03.feed.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import fr.thomasbernard03.feed.commons.navigation.Navigator
+import fr.thomasbernard03.feed.domain.models.Product
 import fr.thomasbernard03.feed.domain.models.Resource
 import fr.thomasbernard03.feed.domain.usecases.MenuUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
@@ -15,7 +17,9 @@ import org.koin.java.KoinJavaComponent.get
 class HomeViewModel(
     private val menuUseCase: MenuUseCase = get(MenuUseCase::class.java),
     private val productUseCase: ProductUseCase = get(ProductUseCase::class.java),
+    private val navigator: Navigator = get(Navigator::class.java)
 ) : ViewModel() {
+
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
@@ -24,6 +28,7 @@ class HomeViewModel(
         when (event) {
             is HomeEvent.OnGetFeaturedMenu -> onGetFeaturedMenus()
             is HomeEvent.OnGetProducts -> onGetProducts()
+            is HomeEvent.OnProductClicked -> onProductClicked(event.product)
         }
     }
 
@@ -53,5 +58,9 @@ class HomeViewModel(
                 }
             }
         }
+    }
+
+    private fun onProductClicked(product : Product){
+        navigator.navigateTo(Navigator.MainDestination.ProductDetail(product.id))
     }
 }

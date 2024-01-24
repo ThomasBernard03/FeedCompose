@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -35,10 +33,7 @@ fun HomeScreen(
         onEvent(HomeEvent.OnGetProducts)
     }
 
-
-
     Column(modifier = Modifier.fillMaxSize()) {
-
         LazyRow(
             contentPadding = PaddingValues(8.dp),
         ) {
@@ -65,12 +60,12 @@ fun HomeScreen(
                     label = it.title,
                     description = it.description,
                     rating = it.rating,
-                    price = it.price
+                    price = it.price,
+                    onClick = { onEvent(HomeEvent.OnProductClicked(it)) }
                 )
             }
         }
     }
-
 }
 
 @Composable
