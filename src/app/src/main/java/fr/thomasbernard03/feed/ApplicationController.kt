@@ -6,7 +6,6 @@ import fr.thomasbernard03.feed.commons.helpers.implementations.ResourcesHelperIm
 import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.commons.navigation.implementations.NavigatorImpl
 import fr.thomasbernard03.feed.domain.usecases.CartUseCase
-import fr.thomasbernard03.feed.domain.usecases.MenuUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +19,6 @@ class ApplicationController : Application() {
 
         single<ResourceHelper> { ResourcesHelperImpl() }
 
-        single { MenuUseCase() }
         single { ProductUseCase() }
         single { CartUseCase() }
 

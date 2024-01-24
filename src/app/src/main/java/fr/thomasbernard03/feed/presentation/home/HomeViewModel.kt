@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.domain.models.Product
 import fr.thomasbernard03.feed.domain.models.Resource
-import fr.thomasbernard03.feed.domain.usecases.MenuUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +14,6 @@ import kotlinx.coroutines.launch
 import org.koin.java.KoinJavaComponent.get
 
 class HomeViewModel(
-    private val menuUseCase: MenuUseCase = get(MenuUseCase::class.java),
     private val productUseCase: ProductUseCase = get(ProductUseCase::class.java),
     private val navigator: Navigator = get(Navigator::class.java)
 ) : ViewModel() {
@@ -26,23 +24,8 @@ class HomeViewModel(
 
     fun onEvent(event: HomeEvent) {
         when (event) {
-            is HomeEvent.OnGetFeaturedMenu -> onGetFeaturedMenus()
             is HomeEvent.OnGetProducts -> onGetProducts()
             is HomeEvent.OnProductClicked -> onProductClicked(event.product)
-        }
-    }
-
-    private fun onGetFeaturedMenus(){
-        viewModelScope.launch {
-            _uiState.update { it.copy(featuredMenus = null) }
-            when(val menus = menuUseCase.getFeaturedMenus()){
-                is Resource.Success -> {
-                    _uiState.update { it.copy(featuredMenus = menus.data) }
-                }
-                is Resource.Error -> {
-                    _uiState.update { it.copy(featuredMenus = emptyList()) }
-                }
-            }
         }
     }
 

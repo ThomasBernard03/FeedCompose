@@ -19,7 +19,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import fr.thomasbernard03.feed.presentation.components.FeaturedMenuCard
 import fr.thomasbernard03.feed.presentation.components.ProductCard
 import fr.thomasbernard03.feed.presentation.theme.FeedTheme
 
@@ -29,26 +28,10 @@ fun HomeScreen(
     onEvent: (HomeEvent) -> Unit
 ) {
     LaunchedEffect(Unit){
-        onEvent(HomeEvent.OnGetFeaturedMenu)
         onEvent(HomeEvent.OnGetProducts)
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        LazyRow(
-            contentPadding = PaddingValues(8.dp),
-        ) {
-            items(state.featuredMenus ?: emptyList()) {
-                FeaturedMenuCard(
-                    modifier = Modifier
-                        .height(100.dp)
-                        .width(200.dp)
-                        .padding(horizontal = 4.dp),
-                    label = it.title,
-                    price = it.price,
-                    picture = it.picture)
-            }
-        }
-
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 150.dp),
             contentPadding = PaddingValues(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 20.dp),
