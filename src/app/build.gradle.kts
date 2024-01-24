@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.com.google.devtools.ksp)
 }
 
 android {
@@ -79,6 +80,11 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    // Room for database
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.room.ktx)
 
     // Retrofit for API calls
     implementation(libs.retrofit)
