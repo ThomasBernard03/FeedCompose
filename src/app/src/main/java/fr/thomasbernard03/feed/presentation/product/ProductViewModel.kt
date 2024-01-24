@@ -3,7 +3,9 @@ package fr.thomasbernard03.feed.presentation.product
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.thomasbernard03.feed.commons.navigation.Navigator
+import fr.thomasbernard03.feed.domain.models.Product
 import fr.thomasbernard03.feed.domain.models.Resource
+import fr.thomasbernard03.feed.domain.usecases.CartUseCase
 import fr.thomasbernard03.feed.domain.usecases.ProductUseCase
 import fr.thomasbernard03.feed.presentation.home.HomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,8 @@ import org.koin.java.KoinJavaComponent.get
 
 class ProductViewModel(
     private val navigator: Navigator = get(Navigator::class.java),
-    private val productUseCase: ProductUseCase = get(ProductUseCase::class.java)
+    private val productUseCase: ProductUseCase = get(ProductUseCase::class.java),
+    private val cartUseCase: CartUseCase = get(CartUseCase::class.java)
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProductUiState())
@@ -25,6 +28,7 @@ class ProductViewModel(
         when (event) {
             is ProductEvent.OnGetProduct -> onGetProduct(event.id)
             is ProductEvent.OnGoBack -> onGoBack()
+            is ProductEvent.OnAddToCart -> onAddToCart(event.product)
         }
     }
 
@@ -38,6 +42,13 @@ class ProductViewModel(
                     _uiState.update { it.copy(product = null) }
                 }
             }
+        }
+    }
+
+    private fun onAddToCart(product: Product) {
+        viewModelScope.launch {
+            cartUseCase.addProductToCart(product)
+            navigator.goBack()
         }
     }
 

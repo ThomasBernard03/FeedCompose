@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -15,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialogDefaults.shape
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,9 +29,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import fr.thomasbernard03.feed.R
+import fr.thomasbernard03.feed.commons.utils.defaultElevation
+import fr.thomasbernard03.feed.presentation.components.PrimaryButton
 import fr.thomasbernard03.feed.presentation.components.RoundedIcon
 
 @Composable
@@ -70,14 +75,17 @@ fun ProductScreen(
 
         if (state.product != null) {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .padding(16.dp)
+                    .fillMaxWidth()
                     .weight(1f)
             ) {
                 AsyncImage(
                     model = state.product.picture,
                     contentDescription = state.product.title,
-                    contentScale = ContentScale.FillWidth
+                    contentScale = ContentScale.Fit
                 )
 
             }
@@ -90,6 +98,9 @@ fun ProductScreen(
             modifier = Modifier
                 .weight(1f),
             shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+            elevation = CardDefaults.elevatedCardElevation(
+                defaultElevation = defaultElevation
+            )
         ) {
             if (state.product != null) {
                 Column(
@@ -111,6 +122,17 @@ fun ProductScreen(
                         text = String.format("", state.product.price),
                         style = MaterialTheme.typography.titleSmall
                     )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Row {
+                        PrimaryButton(
+                            text = stringResource(id = R.string.add_to_cart),
+                            onClick = { onEvent(ProductEvent.OnAddToCart(state.product)) },
+                            modifier = Modifier
+                                .weight(1f)
+                        )
+                    }
                 }
             }
         }

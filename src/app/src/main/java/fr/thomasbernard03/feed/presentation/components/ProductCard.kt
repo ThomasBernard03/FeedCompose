@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import fr.thomasbernard03.feed.R
+import fr.thomasbernard03.feed.commons.utils.defaultElevation
 
 @Composable
 fun ProductCard(
@@ -43,7 +46,10 @@ fun ProductCard(
                 .height(160.dp)
                 .padding(top = 30.dp),
             shape = RoundedCornerShape(8.dp),
-            contentPadding = PaddingValues(0.dp)
+            contentPadding = PaddingValues(0.dp),
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = defaultElevation
+            )
         ) {
             Column(
                 modifier = Modifier
@@ -82,7 +88,10 @@ fun ProductCard(
                     if (price != null) {
                         Text(
                             modifier = Modifier
-                                .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(topStart = 8.dp))
+                                .background(
+                                    MaterialTheme.colorScheme.primary,
+                                    shape = RoundedCornerShape(topStart = 8.dp)
+                                )
                                 .padding(4.dp),
                             text = String.format("%.2f€", price),
                             color = MaterialTheme.colorScheme.background

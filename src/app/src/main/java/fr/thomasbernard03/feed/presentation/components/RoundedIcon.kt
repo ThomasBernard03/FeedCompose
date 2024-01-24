@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.thomasbernard03.feed.R
+import fr.thomasbernard03.feed.commons.utils.defaultElevation
 import fr.thomasbernard03.feed.presentation.theme.FeedTheme
 
 @Composable
@@ -32,6 +34,9 @@ fun RoundedIcon(
         onClick = onClick,
         shape = CircleShape,
         contentPadding = PaddingValues(0.dp),
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = defaultElevation
+        )
     ) {
         Icon(
             imageVector = icon,

@@ -7,4 +7,9 @@
 
 
     <string name="order">Commander</string>
+
+
+
+    <!-- Product screen -->
+    <string name="add_to_cart">Ajouter au panier</string>
 </resources>
