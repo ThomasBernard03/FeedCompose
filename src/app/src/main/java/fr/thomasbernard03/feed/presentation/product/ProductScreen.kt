@@ -70,21 +70,14 @@ fun ProductScreen(
 
 
         if (state.product != null) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) {
-                AsyncImage(
-                    model = state.product.image,
-                    contentDescription = state.product.label,
-                    contentScale = ContentScale.Fit
-                )
-
-            }
+            AsyncImage(modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .weight(1f),
+                model = state.product.image,
+                contentDescription = state.product.label,
+                contentScale = ContentScale.FillHeight
+            )
         }
 
 

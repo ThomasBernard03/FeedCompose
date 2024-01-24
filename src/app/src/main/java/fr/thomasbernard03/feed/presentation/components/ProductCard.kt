@@ -48,7 +48,8 @@ fun ProductCard(
             shape = RoundedCornerShape(8.dp),
             contentPadding = PaddingValues(0.dp),
             elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = defaultElevation
+                defaultElevation = defaultElevation,
+                pressedElevation = defaultElevation,
             )
         ) {
             Column(

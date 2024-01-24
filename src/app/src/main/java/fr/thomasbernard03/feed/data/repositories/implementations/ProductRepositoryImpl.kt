@@ -25,23 +25,45 @@ class ProductRepositoryImpl(
             id = 2,
             label = "Maki thon",
             description = "Thon, riz vinaigré, algue (2 pièces)",
-            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-4.png",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-2.png",
             price = 2.0,
         ),
         ProductDto(
             id = 3,
-            label = "Chirachi saumon avocat",
-            description = "Saumon, avocat, riz vinaigré",
-            image = "https://www.sushishop.fr/product-12875-zoom/chirashi-saumon-avocat.png",
-            price = 12.0,
+            label = "Maki thon",
+            description = "Thon, riz vinaigré, algue (2 pièces)",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-3.png",
+            price = 2.0,
         ),
         ProductDto(
             id = 4,
-            label = "Brochette boeuf fromage",
-            description = "Boeuf, fromage (4 pièces)",
-            image = "https://www.sushiplaza.com/images/Image/Yakitori-Boeuf-Fromage-2.png",
+            label = "Maki thon",
+            description = "Thon, riz vinaigré, algue (2 pièces)",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-4.png",
+            price = 2.0,
+        ),
+        ProductDto(
+            id = 5,
+            label = "Maki avocat",
+            description = "Algue, avocat",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-2.png",
             price = 4.0,
-        ))
+        ),
+        ProductDto(
+            id = 12,
+            label = "Maki saumon roll",
+            description = "Saumon, fromage, riz vinaigré",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/maki-12.png",
+            price = 12.0,
+        ),
+        ProductDto(
+            id = 13,
+            label = "Sashimi saumon",
+            description = "Sashimi de saumon (10 pièces)",
+            image = "https://makesushi31000.fr/wp-content/uploads/2020/05/sashimi-3-768x768.png",
+            price = 14.0,
+        ),
+    )
 
 
     override suspend fun getProducts() : List<ProductEntity> {
