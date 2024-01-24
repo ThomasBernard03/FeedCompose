@@ -16,5 +16,5 @@ data class ProductDto(
     val image : String,
 
     @SerializedName("price")
-    val price : Double,
+    val price : Double?,
 )

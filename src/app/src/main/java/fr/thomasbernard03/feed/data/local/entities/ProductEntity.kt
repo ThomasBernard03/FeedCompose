@@ -11,7 +11,7 @@ data class ProductEntity(
     val label : String,
     val image : String,
     val description : String,
-    val price : Double,
+    val price : Double?,
 ){
     constructor(dto : ProductDto) : this(
         id = dto.id,

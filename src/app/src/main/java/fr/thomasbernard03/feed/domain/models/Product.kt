@@ -7,7 +7,7 @@ data class Product(
     val label : String,
     val description : String,
     val image : String,
-    val price : Double,
+    val price : Double?,
     val rating : Double,
 ){
     constructor(productEntity: ProductEntity) : this(

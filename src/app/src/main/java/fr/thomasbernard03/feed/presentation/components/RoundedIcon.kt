@@ -16,6 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.thomasbernard03.feed.R
@@ -25,7 +26,7 @@ import fr.thomasbernard03.feed.presentation.theme.FeedTheme
 @Composable
 fun RoundedIcon(
     modifier : Modifier = Modifier,
-    icon: ImageVector,
+    @DrawableRes icon: Int,
     onClick : () -> Unit = {}
 ) {
     ElevatedButton(
@@ -35,11 +36,12 @@ fun RoundedIcon(
         shape = CircleShape,
         contentPadding = PaddingValues(0.dp),
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = defaultElevation
+            defaultElevation = defaultElevation,
+            pressedElevation = defaultElevation
         )
     ) {
         Icon(
-            imageVector = icon,
+            painter = painterResource(id = icon),
             contentDescription = null,
             modifier = Modifier.size(24.dp),
             tint = MaterialTheme.colorScheme.primary
@@ -56,7 +58,7 @@ fun RoundedIconPreview() {
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 RoundedIcon(
-                    icon = Icons.Filled.ArrowBack
+                    icon = R.drawable.remove
                 )
             }
         }

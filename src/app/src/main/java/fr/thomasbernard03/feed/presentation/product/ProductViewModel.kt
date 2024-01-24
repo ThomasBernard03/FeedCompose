@@ -25,7 +25,9 @@ class ProductViewModel(
         when (event) {
             is ProductEvent.OnGetProduct -> onGetProduct(event.id)
             is ProductEvent.OnGoBack -> onGoBack()
-            is ProductEvent.OnAddToCart -> onAddToCart(event.product)
+            is ProductEvent.OnAddToCart -> onAddToCart(event.product, event.quantity)
+            is ProductEvent.OnIncrementQuantity -> onIncrementQuantity()
+            is ProductEvent.OnDecrementQuantity -> onDecrementQuantity()
         }
     }
 
@@ -42,13 +44,22 @@ class ProductViewModel(
         }
     }
 
-    private fun onAddToCart(product: Product) {
+    private fun onAddToCart(product: Product, quantity: Int) {
         viewModelScope.launch {
-            productUseCase.addProductToCart(product.id, 1)
+            productUseCase.addProductToCart(product.id, quantity)
             navigator.goBack()
         }
     }
 
     private fun onGoBack() =
         navigator.goBack()
+
+    private fun onIncrementQuantity() {
+        _uiState.update { it.copy(quantity = it.quantity + 1) }
+    }
+
+    private fun onDecrementQuantity() {
+        if (_uiState.value.quantity == 0) return
+        _uiState.update { it.copy(quantity = it.quantity - 1) }
+    }
 }

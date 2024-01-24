@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -53,7 +56,7 @@ fun ProductScreen(
                 .fillMaxWidth()
         ) {
             RoundedIcon(
-                icon = Icons.Filled.ArrowBack,
+                icon = R.drawable.arrow,
                 onClick = { onEvent(ProductEvent.OnGoBack) }
             )
 
@@ -118,14 +121,41 @@ fun ProductScreen(
 
                     Spacer(modifier = Modifier.weight(1f))
 
-                    Row {
-                        PrimaryButton(
-                            text = stringResource(id = R.string.add_to_cart),
-                            onClick = { onEvent(ProductEvent.OnAddToCart(state.product)) },
-                            modifier = Modifier
-                                .weight(1f)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        RoundedIcon(
+                            icon = R.drawable.remove,
+                            onClick = { onEvent(ProductEvent.OnDecrementQuantity) },
                         )
+
+                        Text(text = state.quantity.toString(),
+                            style = MaterialTheme.typography.titleLarge)
+
+                        RoundedIcon(
+                            icon = R.drawable.add,
+                            onClick = { onEvent(ProductEvent.OnIncrementQuantity) },
+                        )
+
+
+                        if (state.product.price != null){
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(
+                                text = String.format("%.2f€", state.product.price * state.quantity),
+                                style = MaterialTheme.typography.titleLarge)
+                        }
                     }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    PrimaryButton(
+                        enabled = state.quantity > 0,
+                        text = stringResource(id = R.string.add_to_cart),
+                        onClick = { onEvent(ProductEvent.OnAddToCart(state.product, state.quantity)) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
                 }
             }
         }

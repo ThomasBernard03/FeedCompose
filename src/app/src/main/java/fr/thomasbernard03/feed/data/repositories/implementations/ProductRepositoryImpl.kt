@@ -20,7 +20,7 @@ class ProductRepositoryImpl(
             label = "Sushis saumon",
             description = "Saumon, riz vinaigré (2 pièces)",
             image = "https://static.vecteezy.com/system/resources/previews/011/190/616/original/sushi-with-salmon-png.png",
-            price = 2.5,
+            price = null,
         ),
         ProductDto(
             id = 2,

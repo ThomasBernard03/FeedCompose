@@ -7,5 +7,8 @@ sealed class ProductEvent {
 
     data object OnGoBack : ProductEvent()
 
-    data class OnAddToCart(val product: Product) : ProductEvent()
+    data class OnAddToCart(val product: Product, val quantity : Int) : ProductEvent()
+
+    data object OnIncrementQuantity : ProductEvent()
+    data object OnDecrementQuantity : ProductEvent()
 }
