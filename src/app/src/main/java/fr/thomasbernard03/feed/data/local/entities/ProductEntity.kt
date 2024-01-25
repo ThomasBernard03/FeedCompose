@@ -1,5 +1,6 @@
 package fr.thomasbernard03.feed.data.local.entities
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.thomasbernard03.feed.data.remote.dto.ProductDto
@@ -20,3 +21,8 @@ data class ProductEntity(
         description = dto.description,
         price = dto.price)
 }
+
+data class ProductWithQuantity(
+    @Embedded val productEntity: ProductEntity,
+    val quantity: Int
+)

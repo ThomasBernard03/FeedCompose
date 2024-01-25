@@ -21,7 +21,7 @@ interface Navigator {
     sealed class MainDestination(override val route: String) : Destination() {
         data object Home : MainDestination("home")
         data object News : MainDestination("stocks")
-        data object Basket : MainDestination("basket")
+        data object Cart : MainDestination("cart")
         data class ProductDetail(val id: Int) : MainDestination("product/$id")
     }
 }

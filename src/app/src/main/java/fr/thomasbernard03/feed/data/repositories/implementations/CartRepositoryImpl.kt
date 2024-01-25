@@ -2,6 +2,7 @@ package fr.thomasbernard03.feed.data.repositories.implementations
 
 import fr.thomasbernard03.feed.data.local.dao.CartDao
 import fr.thomasbernard03.feed.data.local.entities.CartEntity
+import fr.thomasbernard03.feed.data.local.entities.ProductWithQuantity
 import fr.thomasbernard03.feed.data.repositories.CartRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -28,4 +29,7 @@ class CartRepositoryImpl(
         val cart = CartEntity(id, quantity)
         cartDao.insertOrUpdate(cart)
     }
+
+    override suspend fun getCartProductsWithQuantity(): List<ProductWithQuantity>
+            = cartDao.getProductsWithQuantity()
 }

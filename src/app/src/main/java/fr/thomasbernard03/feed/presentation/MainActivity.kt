@@ -41,6 +41,8 @@ import androidx.navigation.navArgument
 import fr.thomasbernard03.feed.R
 import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.domain.models.BottomBarItem
+import fr.thomasbernard03.feed.presentation.cart.CartScreen
+import fr.thomasbernard03.feed.presentation.cart.CartViewModel
 import fr.thomasbernard03.feed.presentation.components.HomeBottomBar
 import fr.thomasbernard03.feed.presentation.home.HomeScreen
 import fr.thomasbernard03.feed.presentation.home.HomeViewModel
@@ -81,7 +83,7 @@ class MainActivity(
                             label = R.string.basket,
                             unselectedIcon = Icons.Outlined.ShoppingCart,
                             selectedIcon = Icons.Filled.ShoppingCart,
-                            route = "basket"
+                            route = "cart"
                         )
                     )
                 }
@@ -137,8 +139,12 @@ class MainActivity(
                             composable("news") {
                                 Text(text = "News")
                             }
-                            composable("basket") {
-                                Text(text = "Basket")
+                            composable(
+                                route = "cart"
+                            ) {
+                                val cartViewModel : CartViewModel = viewModel()
+                                val uiState by cartViewModel.uiState.collectAsStateWithLifecycle()
+                                CartScreen(state = uiState, onEvent = cartViewModel::onEvent)
                             }
                             composable(
                                 route = "product/{id}",
