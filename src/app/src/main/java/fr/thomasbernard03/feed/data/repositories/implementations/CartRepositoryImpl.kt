@@ -10,16 +10,25 @@ import org.koin.java.KoinJavaComponent.get
 
 class CartRepositoryImpl(
     private val cartDao: CartDao = get(CartDao::class.java),
-    private val ioDispatcher: CoroutineDispatcher = get(CoroutineDispatcher::class.java)
 ) : CartRepository {
 
     override suspend fun addProductToCart(id: Int, quantity: Int) {
-        withContext(ioDispatcher){
-            // If the product is already in the cart, we update the quantity
-            val existingUQuantity = cartDao.getCartQuantity(id)
-            val cart = CartEntity(id, existingUQuantity + quantity)
-            cartDao.insertOrUpdate(cart)
-        }
+        // If the product is already in the cart, we update the quantity
+        val existingUQuantity = cartDao.getCartQuantity(id)
+        val cart = CartEntity(id, existingUQuantity + quantity)
+        cartDao.insertOrUpdate(cart)
+    }
+
+    override suspend fun addProductToCart(id: Int) {
+        val actualQuantity = cartDao.getCartQuantity(id)
+        val cart = CartEntity(id, actualQuantity + 1)
+        cartDao.insertOrUpdate(cart)
+    }
+
+    override suspend fun removeProductToCart(id: Int) {
+        val actualQuantity = cartDao.getCartQuantity(id)
+        val cart = CartEntity(id, actualQuantity - 1)
+        cartDao.insertOrUpdate(cart)
     }
 
     override suspend fun getQuantityOfProduct(id: Int): Int =

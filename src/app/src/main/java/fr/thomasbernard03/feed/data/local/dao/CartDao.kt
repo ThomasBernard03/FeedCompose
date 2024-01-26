@@ -22,4 +22,6 @@ interface CartDao {
         WHERE CartEntity.quantity > 0
     """)
     fun getProductsWithQuantity(): List<ProductWithQuantity>
+
+
 }

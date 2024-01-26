@@ -28,4 +28,31 @@ class CartUseCase(
             return@withContext Resource.Success(products)
         }
     }
+
+    suspend fun addProduct(product: ProductWrapper) : Resource<Unit>{
+        return withContext(ioDispatcher){
+            try {
+                cartRepository.addProductToCart(product.id)
+                return@withContext Resource.Success(Unit)
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+                return@withContext Resource.Error(e.message ?: "Error while adding product")
+            }
+
+        }
+    }
+
+    suspend fun removeProduct(product: ProductWrapper) : Resource<Unit>{
+        return withContext(ioDispatcher){
+            try {
+                cartRepository.removeProductToCart(product.id)
+                return@withContext Resource.Success(Unit)
+            }
+            catch (e: Exception){
+                e.printStackTrace()
+                return@withContext Resource.Error(e.message ?: "Error while removing product")
+            }
+        }
+    }
 }

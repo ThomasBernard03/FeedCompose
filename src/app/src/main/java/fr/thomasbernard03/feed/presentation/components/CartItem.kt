@@ -2,13 +2,18 @@ package fr.thomasbernard03.feed.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -17,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import fr.thomasbernard03.feed.R
@@ -44,17 +51,22 @@ fun CartItem(
             defaultElevation = defaultElevation,
         )
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.weight(1f)
+        ) {
             AsyncImage(
                 model = image,
                 contentDescription = null,
-                contentScale = ContentScale.FillHeight,
+                contentScale = ContentScale.FillWidth,
                 modifier = Modifier
-                    .height(100.dp)
+                    .width(100.dp)
             )
 
             Column(
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.weight(1f),
             ) {
                 Text(
                     text = label,
@@ -75,11 +87,38 @@ fun CartItem(
             }
 
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .width(80.dp)
-                    .weight(1f)
+                    .border(1.dp, Color.Black)
+                    .width(42.dp)
+                    .fillMaxHeight()
             ) {
-                Text(text = quantity.toString())
+                Button(
+                    modifier = Modifier.weight(1.5f),
+                    shape = RectangleShape,
+                    onClick = onAddProduct,
+                    contentPadding = PaddingValues(0.dp)
+
+                ) {
+                    Text(text = "+")
+                }
+
+                Text(
+                    modifier = Modifier
+                        .weight(2f)
+                        .wrapContentHeight(align = Alignment.CenterVertically),
+                    text = quantity.toString()
+                )
+
+
+                Button(
+                    modifier = Modifier.weight(1.5f),
+                    shape = RectangleShape,
+                    onClick = onRemoveProduct,
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(text = "-")
+                }
             }
         }
     }

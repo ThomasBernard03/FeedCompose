@@ -9,6 +9,10 @@
     <string name="order">Commander</string>
 
 
+    <!-- Cart screen -->
+    <string name="validate_cart">Valider le panier</string>
+
+
 
     <!-- Product screen -->
     <string name="add_to_cart">Ajouter au panier</string>
