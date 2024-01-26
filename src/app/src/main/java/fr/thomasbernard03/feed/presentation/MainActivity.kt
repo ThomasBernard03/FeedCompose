@@ -1,8 +1,11 @@
 package fr.thomasbernard03.feed.presentation
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -62,6 +65,13 @@ class MainActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+//        enableEdgeToEdge(
+//            navigationBarStyle = SystemBarStyle.dark(
+//                scrim = Color.BLACK
+//            )
+//        )
+        
         setContent {
             FeedTheme {
                 val navController = rememberNavController()

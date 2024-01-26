@@ -7,6 +7,8 @@ import fr.thomasbernard03.feed.commons.helpers.implementations.ResourcesHelperIm
 import fr.thomasbernard03.feed.commons.navigation.Navigator
 import fr.thomasbernard03.feed.commons.navigation.implementations.NavigatorImpl
 import fr.thomasbernard03.feed.data.local.database.AppDatabase
+import fr.thomasbernard03.feed.data.remote.services.ApiService
+import fr.thomasbernard03.feed.data.remote.services.implementations.MockedApiService
 import fr.thomasbernard03.feed.data.repositories.CartRepository
 import fr.thomasbernard03.feed.data.repositories.ProductRepository
 import fr.thomasbernard03.feed.data.repositories.implementations.CartRepositoryImpl
@@ -40,6 +42,8 @@ class ApplicationController : Application() {
 
         single<ProductRepository> { ProductRepositoryImpl()  }
         single<CartRepository> { CartRepositoryImpl()  }
+
+        single<ApiService> { MockedApiService() }
 
         // https://developer.android.com/kotlin/coroutines/coroutines-best-practices?hl=fr
         single<CoroutineDispatcher> { Dispatchers.IO }
