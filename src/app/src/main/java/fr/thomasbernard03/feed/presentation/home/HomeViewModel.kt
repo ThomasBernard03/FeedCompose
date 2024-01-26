@@ -26,6 +26,7 @@ class HomeViewModel(
         when (event) {
             is HomeEvent.OnGetProducts -> onGetProducts()
             is HomeEvent.OnProductClicked -> onProductClicked(event.product)
+            is HomeEvent.OnQueryChanged -> onQueryChanged(event.query)
         }
     }
 
@@ -46,4 +47,7 @@ class HomeViewModel(
     private fun onProductClicked(product : Product){
         navigator.navigateTo(Navigator.MainDestination.ProductDetail(product.id))
     }
+
+    private fun onQueryChanged(query : String) =
+        _uiState.update { it.copy(query = query) }
 }

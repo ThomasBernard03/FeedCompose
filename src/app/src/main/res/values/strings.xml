@@ -8,6 +8,9 @@
 
     <string name="order">Commander</string>
 
+    <!-- Home screen -->
+    <string name="search_product">Rechercher un produit</string>
+
 
     <!-- Cart screen -->
     <string name="validate_cart">Valider le panier</string>

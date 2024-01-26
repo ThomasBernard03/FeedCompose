@@ -6,4 +6,6 @@ sealed class HomeEvent {
     data object OnGetProducts : HomeEvent()
 
     data class OnProductClicked(val product: Product) : HomeEvent()
+
+    data class OnQueryChanged(val query: String) : HomeEvent()
 }
